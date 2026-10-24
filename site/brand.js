@@ -8,9 +8,19 @@ window.BRAND = {
   name: "Fiestalia",            // ← nombre de tu marca
   tagline: "El álbum de tu evento, hecho por tus invitados",
   domain: "fiestalia.com",       // ← tu dominio
-  email: "hola@fiestalia.com",   // ← correo de contacto
+  email: "exp.span.group@gmail.com",   // correo de contacto (cámbialo a hola@fiestalia.com cuando exista el buzón)
   whatsapp: "+34 634 11 85 79",   // teléfono / WhatsApp
-  city: "Madrid, España",
+  city: "Alcobendas, Madrid, España",
+  // Datos del titular para Aviso legal, Privacidad, Cookies y Condiciones (site/legal/)
+  legal: {
+    titular: "SYNTH MASHI, S.L.",
+    nif: "B05675947",
+    domicilio: "Travesía Huesca, 8, Piso 0, Puerta 3, 28100 Alcobendas, Madrid, España",
+    registro: "Inscrita en el Registro Mercantil de Madrid, hoja M-898556",
+    email: "exp.span.group@gmail.com",
+    telefono: "+34 634 118 579",
+    actualizado: "24 de octubre de 2026"
+  },
   // Tema de color: "fiesta" (coral/violeta del logo), "oro" (marfil y oro), "negro" (negro y oro),
   // "esmeralda" (esmeralda y oro), "burdeos" (burdeos y champán), "medianoche" (azul noche y oro),
   // "noche" (fondo oscuro de gala) o "rosa" (rosa cuarzo nupcial).
