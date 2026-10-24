@@ -19,7 +19,7 @@
 .legal table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
 .legal th, .legal td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
 .legal th { color: var(--ink); background: var(--bg-2); font-weight: 800; }
-.legal-nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 36px; padding: 0; list-style: none; font-size: 14px; font-weight: 700; }
+.legal ul.legal-nav { list-style: none; margin: 0 0 36px; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 36px; padding: 0; list-style: none; font-size: 14px; font-weight: 700; }
 .legal-nav a { color: var(--ink-3); }
 .legal-nav a.active, .legal-nav a:hover { color: var(--brand); }
 .legal-footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 14px; }
