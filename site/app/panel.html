@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel del organizador — Fiestalia</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="logo" href="../index.html" aria-label="Fiestalia"><img src="../assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+    <nav class="nav-links" aria-label="Panel">
+      <a href="#resumen">Resumen</a><a href="#fotos">Fotos</a><a href="#ajustes">Ajustes</a><a href="#plan">Plan</a>
+    </nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" id="openAlbum" target="_blank">Ver álbum</a><a class="btn btn-primary btn-sm" id="openLive" target="_blank">Live Wall</a></div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="container">
+    <section id="denied" class="card narrow" hidden style="text-align:center">
+      <h1 class="h1">No tienes acceso a este panel</h1>
+      <p class="sub" id="deniedMsg">El enlace del panel no es válido. Usa el enlace privado que recibiste al crear el álbum.</p>
+      <div class="actions" style="justify-content:center"><a class="btn btn-primary" href="crear.html">Crear un álbum</a></div>
+    </section>
+
+    <div id="panel" hidden>
+      <section class="card" id="resumen">
+        <span class="eyebrow">Panel del organizador</span>
+        <h1 class="h1" id="name"></h1>
+        <p class="sub" id="meta"></p>
+        <div class="stats">
+          <div class="stat"><b id="sPhotos">0</b><span>fotos y vídeos</span></div>
+          <div class="stat"><b id="sGuests">0</b><span>invitados que han subido</span></div>
+          <div class="stat"><b id="sPending">0</b><span>pendientes de aprobar</span></div>
+          <div class="stat"><b id="sSize">0</b><span>almacenamiento usado</span></div>
+        </div>
+        <div style="margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span id="limitText" style="font-size:14px;color:var(--ink-2)"></span>
+          <span id="planBadge" class="badge"></span>
+        </div>
+        <div class="meter"><i id="meter" style="width:0%"></i></div>
+
+        <div class="qr-box" style="margin-top:28px">
+          <div id="qr"></div>
+          <div>
+            <b>Enlace para invitados</b>
+            <div class="link-row"><input id="albumLink" readonly><button class="btn btn-ghost btn-sm" id="copyAlbum" type="button">Copiar</button></div>
+            <b style="display:block;margin-top:14px">Enlace del Live Wall (para la pantalla del salón)</b>
+            <div class="link-row"><input id="liveLink" readonly><button class="btn btn-ghost btn-sm" id="copyLive" type="button">Copiar</button></div>
+            <div class="actions" style="margin-top:16px">
+              <button class="btn btn-primary btn-sm" id="dlQr" type="button">Descargar QR (PNG)</button>
+              <button class="btn btn-ghost btn-sm" id="printCard" type="button">Imprimir tarjetas QR</button>
+              <button class="btn btn-ghost btn-sm" id="dlZip" type="button">Descargar todo (ZIP)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="fotos">
+        <h2 style="font-size:22px;font-weight:800">Fotos</h2>
+        <div class="tabs">
+          <button class="on" data-f="all">Todas</button>
+          <button data-f="pending">Pendientes</button>
+          <button data-f="hidden">Ocultas</button>
+          <button data-f="video">Vídeos</button>
+        </div>
+        <div id="grid" class="grid"></div>
+        <div id="empty" class="empty" hidden><b>Nada por aquí</b>Cuando los invitados suban fotos aparecerán en esta lista.</div>
+      </section>
+
+      <section class="card" id="ajustes">
+        <h2 style="font-size:22px;font-weight:800">Ajustes</h2>
+        <div class="toggle"><div><b>Subidas abiertas</b><span>Si lo apagas, los invitados pueden ver el álbum pero no subir más fotos.</span></div><label class="switch"><input type="checkbox" id="tUploads"><i></i></label></div>
+        <div class="toggle"><div><b>Moderación previa</b><span>Las fotos nuevas quedan ocultas hasta que las apruebes en la pestaña «Pendientes».</span></div><label class="switch"><input type="checkbox" id="tModeration"><i></i></label></div>
+        <div class="toggle"><div><b>Búsqueda por selfie <span class="badge gold">próximamente</span></b><span>Cada invitado encuentra sus fotos con una selfie. Requiere consentimiento explícito; ver la política de privacidad.</span></div><label class="switch"><input type="checkbox" id="tSelfie" disabled><i></i></label></div>
+        <form id="editForm" style="margin-top:8px">
+          <div class="row2">
+            <div class="field"><label for="eName">Nombre del evento</label><input id="eName" maxlength="80" required></div>
+            <div class="field"><label for="eDate">Fecha</label><input id="eDate" type="date"></div>
+          </div>
+          <div class="field"><label for="eWelcome">Mensaje para los invitados</label><textarea id="eWelcome" maxlength="240"></textarea></div>
+          <div class="actions"><button class="btn btn-primary" type="submit">Guardar cambios</button></div>
+        </form>
+      </section>
+
+      <section class="card" id="plan">
+        <h2 style="font-size:22px;font-weight:800">Plan y pago</h2>
+        <p class="sub" id="planText"></p>
+        <div class="plans-mini" id="plansMini"></div>
+        <p style="margin-top:14px;font-size:13px;color:var(--ink-3)">Pago único con IVA incluido, sin suscripción. El plan se activa en cuanto se confirma el pago y las fotos en espera se publican solas. <a href="../legal/condiciones.html" target="_blank">Condiciones</a>.</p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<div class="progress" id="progress"></div>
+<div class="print-card" id="printArea"></div>
+
+<script src="vendor/qrcode.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../brand.js"></script>
+<script src="config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/store.js"></script>
+<script>
+(async function () {
+  const { qs, qsa, params, esc, toast, fmtDate, fmtInt, fmtBytes, timeAgo, qrSvg, qrPngDataUrl, albumUrl, liveUrl, lightbox, copy, demoBanner } = UI;
+  const B = window.BRAND, CFG = window.FIESTALIA_CONFIG;
+  demoBanner();
+  const code = params.get("a"), key = params.get("k");
+  let album;
+  try { album = await store.getAlbumAdmin(code, key); } catch (e) { qs("#denied").hidden = false; if (!code) qs("#deniedMsg").textContent = "Falta el identificador del álbum."; return; }
+  qs("#panel").hidden = false;
+
+  const aUrl = albumUrl(code), lUrl = liveUrl(code);
+  qs("#openAlbum").href = aUrl; qs("#openLive").href = lUrl;
+  qs("#albumLink").value = aUrl; qs("#liveLink").value = lUrl;
+  qs("#qr").innerHTML = qrSvg(aUrl, 220);
+  qs("#copyAlbum").onclick = () => copy(aUrl); qs("#copyLive").onclick = () => copy(lUrl);
+  qs("#dlQr").onclick = async () => { const a = document.createElement("a"); a.href = await qrPngDataUrl(aUrl, 1024); a.download = `qr-${code}.png`; a.click(); };
+  qs("#printCard").onclick = () => {
+    const one = `<div class="pc"><h2>${esc(album.name)}</h2><p>${album.event_date ? fmtDate(album.event_date) : ""}</p>${qrSvg(aUrl, 200)}<p><b>Escanea y sube tus fotos</b></p><p>Sin app · sin registro</p><p class="url">${esc(aUrl)}</p><p style="margin-top:10px;font-size:11px;color:#777">Las fotos se comparten en un álbum privado · ${esc(B.name)}</p></div>`;
+    qs("#printArea").innerHTML = `<div class="cards">${one}${one}${one}${one}</div>`; window.print();
+  };
+
+  function renderHead() {
+    document.title = `Panel · ${album.name}`;
+    qs("#name").textContent = album.name;
+    qs("#meta").textContent = [album.event_date ? fmtDate(album.event_date) : "", `caduca el ${fmtDate(album.expires_at)}`].filter(Boolean).join(" · ");
+    const plan = store.planFor(album.plan);
+    qs("#planBadge").textContent = "Plan " + plan.name; qs("#planBadge").className = "badge " + (album.plan === "gratis" ? "" : "gold");
+    qs("#tUploads").checked = !!album.uploads_open; qs("#tModeration").checked = !!album.moderation; qs("#tSelfie").checked = !!album.selfie_enabled;
+    qs("#eName").value = album.name; qs("#eDate").value = album.event_date || ""; qs("#eWelcome").value = album.welcome || "";
+    renderPlans();
+  }
+
+  // Fotos
+  let photos = [], filter = "all";
+  function visible() {
+    return photos.filter((p) => filter === "all" ? true : filter === "pending" ? (p.hidden && album.moderation) : filter === "hidden" ? p.hidden : p.type === "video");
+  }
+  function renderStats() {
+    const guests = new Set(photos.map((p) => p.uploader_name)).size;
+    const pending = photos.filter((p) => p.hidden).length;
+    const size = photos.reduce((s, p) => s + (p.size || 0), 0);
+    qs("#sPhotos").textContent = fmtInt(photos.length); qs("#sGuests").textContent = fmtInt(guests);
+    qs("#sPending").textContent = fmtInt(pending); qs("#sSize").textContent = fmtBytes(size);
+    const pct = Math.min(100, Math.round(100 * photos.length / album.photo_limit));
+    qs("#meter").style.width = pct + "%"; qs("#meter").style.background = pct >= 90 ? "#b3261e" : "";
+    qs("#limitText").textContent = `${fmtInt(photos.length)} de ${fmtInt(album.photo_limit)} fotos del plan (${pct} %)` + (pct >= 90 ? " · amplía el plan para no dejar fotos fuera" : "");
+  }
+  function card(p) {
+    const el = document.createElement("div"); el.className = "ph" + (p.hidden ? " hidden-ph" : "");
+    el.innerHTML = `<img alt="" loading="lazy">${p.type === "video" ? '<span class="vid">▶</span>' : ""}<span class="who">${esc(p.uploader_name)} · ${timeAgo(p.created_at)}</span>
+      <span class="adm"><button data-act="toggle">${p.hidden ? "Mostrar" : "Ocultar"}</button><button data-act="del">Eliminar</button></span>`;
+    store.thumbUrl(p).then((u) => (qs("img", el).src = u));
+    qs("img", el).onclick = () => { const v = visible(); lightbox(v, v.findIndex((x) => x.id === p.id)); };
+    el.querySelector('[data-act="toggle"]').onclick = async () => { await store.setPhotoHidden(code, key, p.id, !p.hidden); p.hidden = !p.hidden; renderGrid(); toast(p.hidden ? "Foto oculta" : "Foto visible"); };
+    el.querySelector('[data-act="del"]').onclick = async () => { if (!confirm("¿Eliminar esta foto definitivamente?")) return; await store.deletePhoto(code, key, p.id); photos = photos.filter((x) => x.id !== p.id); renderGrid(); toast("Foto eliminada"); };
+    return el;
+  }
+  function renderGrid() { const v = visible(); const g = qs("#grid"); g.innerHTML = ""; v.forEach((p) => g.appendChild(card(p))); qs("#empty").hidden = v.length > 0; renderStats(); }
+  qsa(".tabs button").forEach((b) => (b.onclick = () => { qsa(".tabs button").forEach((x) => x.classList.remove("on")); b.classList.add("on"); filter = b.dataset.f; renderGrid(); }));
+  photos = await store.listPhotos(code, { includeHidden: true });
+  renderHead(); renderGrid();
+  store.subscribe(code, (p) => { if (photos.some((x) => x.id === p.id)) return; photos.unshift(p); renderGrid(); });
+
+  // Ajustes
+  async function patch(obj) { try { album = await store.updateAlbum(code, key, obj); renderHead(); toast("Guardado"); } catch (e) { toast("No se pudo guardar: " + e.message, "err"); } }
+  qs("#tUploads").onchange = (e) => patch({ uploads_open: e.target.checked });
+  qs("#tModeration").onchange = (e) => patch({ moderation: e.target.checked });
+  qs("#editForm").onsubmit = (e) => { e.preventDefault(); patch({ name: qs("#eName").value.trim() || album.name, event_date: qs("#eDate").value || null, welcome: qs("#eWelcome").value.trim() }); };
+
+  // ZIP
+  qs("#dlZip").onclick = async () => {
+    const list = photos.filter((p) => !p.hidden); if (!list.length) { toast("No hay fotos que descargar"); return; }
+    const prog = qs("#progress"); prog.classList.add("on");
+    const zip = new JSZip(); const folder = zip.folder(album.name.replace(/[\\/:*?"<>|]/g, "_"));
+    for (let i = 0; i < list.length; i++) {
+      prog.textContent = `Preparando ${i + 1} de ${list.length}…`;
+      const p = list[i]; const blob = await store.fetchBlob(p); if (!blob) continue;
+      const ext = (p.mime || "").split("/")[1] || "bin";
+      folder.file(`${String(i + 1).padStart(4, "0")}_${p.uploader_name.replace(/[^\p{L}\p{N}]+/gu, "-")}.${ext}`, blob);
+    }
+    prog.textContent = "Comprimiendo…";
+    const out = await zip.generateAsync({ type: "blob" }, (m) => (prog.textContent = `Comprimiendo ${Math.round(m.percent)} %`));
+    const a = document.createElement("a"); a.href = URL.createObjectURL(out); a.download = `${album.name}.zip`; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 10000); prog.classList.remove("on"); toast("ZIP listo");
+  };
+
+  // Plan y pago
+  function renderPlans() {
+    const current = store.planFor(album.plan); const idx = B.plans.findIndex((p) => p.id === current.id);
+    qs("#planText").textContent = album.plan === "gratis"
+      ? `Estás en el plan gratuito: ${fmtInt(current.photos)} fotos y ${current.months} mes de álbum. Amplía cuando quieras, incluso durante el evento.`
+      : `Plan ${current.name} activo${album.paid_at ? " desde el " + fmtDate(album.paid_at) : ""}: hasta ${fmtInt(current.photos)} fotos, álbum disponible hasta el ${fmtDate(album.expires_at)}.`;
+    const upgrades = B.plans.slice(idx + 1);
+    qs("#plansMini").innerHTML = upgrades.length ? upgrades.map((p) => `
+      <div class="pm"><b>${p.name}</b><div class="price">${p.price} €</div>
+        <small>${fmtInt(p.photos)} fotos · ${p.gb} GB · ${p.months} meses${p.liveWall ? " · Live Wall" : ""}</small>
+        <button class="btn btn-primary btn-sm btn-block" data-plan="${p.id}">Elegir ${p.name}</button></div>`).join("")
+      : `<p class="sub">Tienes el plan más amplio. ¡Gracias!</p>`;
+    qsa("#plansMini button").forEach((b) => (b.onclick = () => pay(b.dataset.plan)));
+  }
+  async function pay(planId) {
+    const link = (CFG.stripeLinks || {})[planId];
+    if (link) {
+      const u = new URL(link); u.searchParams.set("client_reference_id", code); u.searchParams.set("prefilled_email", album.organizer_email);
+      location.href = u.toString(); return;
+    }
+    if (store.mode === "demo") {
+      if (!confirm(`Modo demo: simular el pago del plan ${store.planFor(planId).name}?`)) return;
+      album = await store.applyPayment(code, key, planId); renderHead(); renderStats(); toast(`Plan ${store.planFor(planId).name} activado 🎉`); return;
+    }
+    toast("El pago aún no está configurado. Escríbenos y lo activamos a mano.", "err");
+  }
+  if (params.get("paid")) { toast("¡Gracias! Estamos confirmando tu pago…"); let tries = 0; const t = setInterval(async () => { album = await store.getAlbumAdmin(code, key); renderHead(); renderStats(); if (album.plan !== "gratis" || ++tries > 12) { clearInterval(t); if (album.plan !== "gratis") toast(`Plan ${store.planFor(album.plan).name} activado 🎉`); } }, 5000); }
+  if (params.get("upgrade") && params.get("upgrade") !== "gratis") { document.getElementById("plan").scrollIntoView({ behavior: "smooth" }); }
+})();
+</script>
+</body>
+</html>

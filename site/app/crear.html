@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear álbum — Fiestalia</title>
+  <meta name="description" content="Crea el álbum QR de tu evento en dos minutos: nombre, fecha y listo. Tus invitados suben fotos sin app.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="logo" href="../index.html" aria-label="Fiestalia, inicio"><img src="../assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="../index.html#como-funciona">Cómo funciona</a>
+      <a href="../index.html#precios">Precios</a>
+      <a href="../index.html#faq">Preguntas</a>
+    </nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="../index.html">Volver</a></div>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="container narrow">
+
+    <section id="formCard" class="card">
+      <span class="eyebrow">Paso 1 de 1</span>
+      <h1 class="h1">Crea el álbum de tu evento</h1>
+      <p class="sub">Dos minutos. Al terminar tendrás el código QR para imprimir y el enlace del panel de organizador.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="name">Nombre del evento *</label>
+          <input id="name" name="name" required maxlength="80" placeholder="Boda de Lucía y Marcos" autocomplete="off">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="date">Fecha del evento</label>
+            <input id="date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="type">Tipo de evento</label>
+            <select id="type" name="type">
+              <option value="boda">Boda</option>
+              <option value="cumpleanos">Cumpleaños</option>
+              <option value="comunion">Comunión o bautizo</option>
+              <option value="quinceanera">Quinceañera</option>
+              <option value="graduacion">Graduación</option>
+              <option value="empresa">Evento de empresa</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="organizer">Tu nombre *</label>
+            <input id="organizer" name="organizer" required maxlength="80" placeholder="Lucía García" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">Tu correo electrónico *</label>
+            <input id="email" name="email" type="email" required placeholder="lucia@ejemplo.com" autocomplete="email">
+            <span class="hint">Te enviaremos el enlace del panel y el aviso antes de que caduque el álbum.</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="welcome">Mensaje para tus invitados</label>
+          <textarea id="welcome" name="welcome" maxlength="240" placeholder="¡Gracias por venir! Sube aquí tus fotos y vídeos de la boda para que no se pierda ninguna."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Plan</label>
+          <div class="plan-pick" id="planPick"></div>
+          <span class="hint">Empiezas gratis con <b data-brand-free>50</b> fotos. El plan de pago se activa después, desde el panel, cuando lo necesites.</span>
+        </div>
+
+        <label class="check"><input type="checkbox" name="moderation" id="moderation"> <span><b>Moderación previa.</b> Las fotos nuevas quedan ocultas hasta que las apruebes desde el panel.</span></label>
+        <label class="check"><input type="checkbox" id="accept" required> <span>He leído y acepto las <a href="../legal/condiciones.html" target="_blank">Condiciones de uso</a> y la <a href="../legal/privacidad.html" target="_blank">Política de privacidad</a>. Informaré a mis invitados de que el evento se fotografía y se comparte en un álbum privado. *</span></label>
+
+        <div class="actions">
+          <button class="btn btn-primary btn-lg btn-block" id="submit" type="submit">Crear mi álbum</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="resultCard" class="card" hidden>
+      <span class="eyebrow">¡Listo!</span>
+      <h1 class="h1" id="resName"></h1>
+      <p class="sub">Tu álbum ya existe. Guarda estos dos enlaces: el primero es para tus invitados, el segundo es tu panel privado.</p>
+
+      <div class="qr-box" style="margin-top:24px">
+        <div id="qr"></div>
+        <div>
+          <b>Enlace para invitados</b>
+          <div class="link-row"><input id="albumLink" readonly><button class="btn btn-ghost btn-sm" id="copyAlbum" type="button">Copiar</button></div>
+          <b style="display:block;margin-top:16px">Panel de organizador (privado)</b>
+          <div class="link-row"><input id="panelLink" readonly><button class="btn btn-ghost btn-sm" id="copyPanel" type="button">Copiar</button></div>
+        </div>
+      </div>
+
+      <div class="warn"><b>Importante:</b> el enlace del panel es tu llave. No lo compartas con los invitados y guárdalo en un lugar seguro: si lo pierdes no podrás gestionar el álbum. <span id="emailNote"></span></div>
+
+      <div class="actions">
+        <a class="btn btn-primary" id="goPanel">Abrir el panel</a>
+        <a class="btn btn-ghost" id="goAlbum" target="_blank">Ver el álbum como invitado</a>
+        <button class="btn btn-ghost" id="printCard" type="button">Imprimir tarjeta QR</button>
+      </div>
+    </section>
+
+    <section id="mine" class="card" hidden>
+      <h2 style="font-size:18px;font-weight:800">Tus álbumes en este dispositivo</h2>
+      <ul id="mineList" style="margin-top:12px;display:grid;gap:8px"></ul>
+    </section>
+
+  </div>
+</main>
+
+<div class="print-card" id="printArea"></div>
+
+<script src="vendor/qrcode.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../brand.js"></script>
+<script src="config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/store.js"></script>
+<script>
+(function () {
+  const { qs, params, esc, toast, qrSvg, albumUrl, panelUrl, copy, demoBanner, fmtDate } = UI;
+  const B = window.BRAND;
+  demoBanner();
+  document.querySelectorAll("[data-brand-free]").forEach((el) => (el.textContent = B.freePhotos));
+
+  // Planes
+  const pick = qs("#planPick"); const wanted = params.get("plan") || "gratis";
+  pick.innerHTML = B.plans.map((p) => `
+    <label><input type="radio" name="plan" value="${p.id}" ${p.id === wanted ? "checked" : ""}>
+      <b>${p.name}</b><span>${new Intl.NumberFormat("es-ES").format(p.photos)} fotos · ${p.months} ${p.months === 1 ? "mes" : "meses"}</span>
+      <div class="price">${p.price === 0 ? "Gratis" : p.price + " €"}</div></label>`).join("");
+
+  // Álbumes guardados en este dispositivo
+  const MINE = "fiestalia.myAlbums";
+  const mine = () => { try { return JSON.parse(localStorage.getItem(MINE) || "[]"); } catch { return []; } };
+  function renderMine() {
+    const list = mine(); if (!list.length) return;
+    qs("#mine").hidden = false;
+    qs("#mineList").innerHTML = list.map((a) => `<li style="display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 14px"><span><b>${esc(a.name)}</b><br><small style="color:var(--ink-3)">${a.date ? fmtDate(a.date) : "sin fecha"}</small></span><span style="display:flex;gap:6px"><a class="btn btn-ghost btn-sm" href="${panelUrl(a.code, a.key)}">Panel</a><a class="btn btn-ghost btn-sm" href="${albumUrl(a.code)}">Álbum</a></span></li>`).join("");
+  }
+  renderMine();
+
+  qs("#form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = e.target;
+    if (!f.name.value.trim() || !f.organizer.value.trim() || !f.email.checkValidity()) { toast("Revisa los campos obligatorios", "err"); f.reportValidity(); return; }
+    if (!qs("#accept").checked) { toast("Debes aceptar las condiciones", "err"); return; }
+    const btn = qs("#submit"); btn.disabled = true; btn.textContent = "Creando…";
+    try {
+      const { album, adminKey } = await store.createAlbum({
+        name: f.name.value, date: f.date.value, type: f.type.value, organizer: f.organizer.value, email: f.email.value,
+        welcome: f.welcome.value, plan: f.plan.value, moderation: qs("#moderation").checked
+      });
+      const list = mine(); list.unshift({ code: album.code, key: adminKey, name: album.name, date: album.event_date }); localStorage.setItem(MINE, JSON.stringify(list.slice(0, 20)));
+      const aUrl = albumUrl(album.code), pUrl = panelUrl(album.code, adminKey);
+      qs("#resName").textContent = album.name;
+      qs("#qr").innerHTML = qrSvg(aUrl, 220);
+      qs("#albumLink").value = aUrl; qs("#panelLink").value = pUrl;
+      qs("#goPanel").href = pUrl + (album.requested_plan !== "gratis" ? "&upgrade=" + album.requested_plan : "");
+      qs("#goAlbum").href = aUrl;
+      qs("#emailNote").textContent = store.mode === "demo" ? "En modo demo no se envían correos." : `Te lo hemos enviado también a ${album.organizer_email}.`;
+      qs("#printArea").innerHTML = printCards(album, aUrl);
+      qs("#formCard").hidden = true; qs("#resultCard").hidden = false; window.scrollTo({ top: 0, behavior: "smooth" });
+      renderMine();
+      if (album.requested_plan !== "gratis") toast(`Álbum creado. Activa el plan ${store.planFor(album.requested_plan).name} desde el panel.`);
+    } catch (err) { console.error(err); toast("No se pudo crear el álbum: " + (err.message || err), "err"); }
+    finally { btn.disabled = false; btn.textContent = "Crear mi álbum"; }
+  });
+
+  qs("#copyAlbum").onclick = () => copy(qs("#albumLink").value);
+  qs("#copyPanel").onclick = () => copy(qs("#panelLink").value);
+  qs("#printCard").onclick = () => window.print();
+
+  function printCards(album, url) {
+    const one = `<div class="pc"><h2>${esc(album.name)}</h2><p>${album.event_date ? fmtDate(album.event_date) : ""}</p>${qrSvg(url, 200)}<p><b>Escanea y sube tus fotos</b></p><p>Sin app · sin registro</p><p class="url">${esc(url)}</p><p style="margin-top:10px;font-size:11px;color:#777">Las fotos se comparten en un álbum privado · ${esc(B.name)}</p></div>`;
+    return `<div class="cards">${one}${one}${one}${one}</div>`;
+  }
+})();
+</script>
+</body>
+</html>
