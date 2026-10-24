@@ -13,8 +13,8 @@
  * plan. El webhook supabase/functions/stripe-webhook marca el álbum como pagado.
  */
 window.FIESTALIA_CONFIG = {
-  supabaseUrl: "",        // p. ej. "https://abcdefgh.supabase.co"
-  supabaseAnonKey: "",    // clave anon public
+  supabaseUrl: "https://nffaughndygvzkrvkamq.supabase.co",
+  supabaseAnonKey: "sb_publishable_eFgK8soBjxFI0AqxusAe1g_g-kztvjL",  // clave pública (publishable)
   storageBucket: "media",
   stripeLinks: {          // URL del Payment Link de cada plan (vacío = demo)
     basico: "",
