@@ -1,0 +1,28 @@
+/* Páginas legales: tipografía de lectura larga sobre los tokens del sitio */
+.legal-main { padding: 48px 0 80px; }
+.legal { max-width: 780px; margin: 0 auto; }
+.legal .eyebrow { margin-bottom: 10px; }
+.legal h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px); font-weight: 700; margin-bottom: 8px; }
+.legal .updated { color: var(--ink-3); font-size: 14px; margin-bottom: 32px; }
+.legal h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin: 40px 0 12px; }
+.legal h3 { font-size: 18px; font-weight: 800; margin: 26px 0 8px; }
+.legal p, .legal li { color: var(--ink-2); font-size: 16px; line-height: 1.7; }
+.legal p + p { margin-top: 12px; }
+.legal ul, .legal ol { margin: 10px 0 10px 22px; list-style: disc; display: grid; gap: 6px; }
+.legal ol { list-style: decimal; }
+.legal a { color: var(--brand); font-weight: 700; }
+.legal strong { color: var(--ink); }
+.legal .box { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 18px 22px; margin: 16px 0; }
+.legal .box p { margin: 0; }
+.legal .box p + p { margin-top: 6px; }
+.legal .notice { border-left: 4px solid var(--accent); }
+.legal table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+.legal th, .legal td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+.legal th { color: var(--ink); background: var(--bg-2); font-weight: 800; }
+.legal ul.legal-nav { list-style: none; margin: 0 0 36px; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 36px; padding: 0; list-style: none; font-size: 14px; font-weight: 700; }
+.legal-nav a { color: var(--ink-3); }
+.legal-nav a.active, .legal-nav a:hover { color: var(--brand); }
+.legal-footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 14px; }
+.legal-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+.legal-footer a { color: var(--ink-2); }
+@media (max-width: 560px) { .legal table { font-size: 13px; } .legal th, .legal td { padding: 8px; } }
