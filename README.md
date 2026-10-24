@@ -35,3 +35,29 @@ El sitio se publica solo en GitHub Pages con el workflow `.github/workflows/page
 - Conectar los botones «Crear álbum» / «Elegir plan» al backend o a la pasarela de pago.
 - Sustituir las opiniones de ejemplo por testimonios reales.
 - Redactar aviso legal, política de privacidad (incluida la base jurídica del reconocimiento facial, RGPD art. 9) y cookies; hoy son enlaces vacíos.
+
+## La app (álbum, subida por QR, galería, panel, Live Wall)
+
+```
+site/app/
+  crear.html    # crear álbum → QR + enlace de invitados + enlace privado del panel
+  album.html    # vista de invitado: nombre, subida de fotos/vídeos, galería en tiempo real
+  panel.html    # panel del organizador: estadísticas, QR, moderación, ZIP, ajustes, plan y pago
+  live.html     # Live Wall a pantalla completa para el proyector del salón
+  config.js     # ← conexión con Supabase y enlaces de pago de Stripe
+  js/store.js   # capa de datos: IndexedDB (demo) o Supabase (producción)
+  js/ui.js      # QR, miniaturas, lightbox, toasts
+supabase/
+  schema.sql                       # tablas, RLS, funciones, bucket "media"
+  functions/stripe-webhook/        # activa el plan al completarse el pago
+```
+
+**Modo demo.** Sin configurar `config.js`, todo funciona guardando los datos en el navegador (IndexedDB): sirve para probar el flujo completo, pero los álbumes no se ven desde otros móviles.
+
+**Producción.**
+1. Crea un proyecto en [Supabase](https://supabase.com) (región Frankfurt), ejecuta `supabase/schema.sql` en el SQL Editor y activa Realtime para la tabla `photos`.
+2. Copia Project URL y la clave `anon` en `site/app/config.js`.
+3. En Stripe crea un Payment Link por plan (19 €, 39 €, 69 €) con el metadato `plan` = `basico` | `celebracion` | `gran-evento`; pega las URL en `config.js`.
+4. Despliega el webhook: `supabase functions deploy stripe-webhook --no-verify-jwt` y configura en Stripe el evento `checkout.session.completed`.
+
+Pendiente para después del MVP: búsqueda por selfie (requiere evaluación de impacto y proveedor de reconocimiento facial en la UE), correos transaccionales (enlace del panel, aviso de caducidad), limpieza automática de Storage.

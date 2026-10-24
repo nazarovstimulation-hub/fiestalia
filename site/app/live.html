@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Wall — Fiestalia</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="live">
+<div class="live-wrap">
+  <div class="live-top">
+    <h1 id="title">Live Wall</h1>
+    <span class="live"><i></i> EN DIRECTO · <span id="count">0 fotos</span></span>
+  </div>
+  <div class="live-grid" id="grid"></div>
+  <div class="live-empty" id="empty" hidden>Escanea el QR de tu mesa y sé quien suba la primera foto</div>
+  <div class="live-empty" id="locked" hidden></div>
+</div>
+<div class="live-qr" id="qr"></div>
+
+<script src="vendor/qrcode.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../brand.js"></script>
+<script src="config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/store.js"></script>
+<script>
+(async function () {
+  const { qs, params, esc, qrSvg, albumUrl, fmtInt } = UI;
+  const code = params.get("a");
+  const album = code ? await store.getAlbum(code).catch(() => null) : null;
+  if (!album) { qs("#title").textContent = "Álbum no encontrado"; qs("#qr").hidden = true; return; }
+  qs("#title").textContent = album.name; document.title = `Live Wall · ${album.name}`;
+  qs("#qr").innerHTML = qrSvg(albumUrl(code), 150) + "<b>Escanea y sube tu foto</b>";
+
+  const plan = store.planFor(album.plan);
+  if (!plan.liveWall) {
+    qs("#grid").hidden = true; qs("#locked").hidden = false;
+    qs("#locked").innerHTML = `<div><b style="color:#fff;display:block;font-size:26px;margin-bottom:8px">Live Wall no incluido en el plan ${esc(plan.name)}</b>Disponible en los planes Celebración y Gran evento. Actívalo desde el panel del organizador.</div>`;
+    return;
+  }
+
+  const MAX = 17; let photos = []; const grid = qs("#grid");
+  const layout = (i) => (i === 0 ? "big" : i === 7 ? "big" : "");
+  function render(newId) {
+    grid.innerHTML = "";
+    photos.slice(0, MAX).forEach((p, i) => {
+      const el = document.createElement("div"); el.className = "ph " + layout(i) + (p.id === newId ? " new" : "");
+      el.innerHTML = `<img alt=""><span class="who">${esc(p.uploader_name)}</span>`;
+      store.thumbUrl(p).then((u) => (qs("img", el).src = u));
+      grid.appendChild(el);
+    });
+    qs("#count").textContent = `${fmtInt(photos.length)} ${photos.length === 1 ? "foto" : "fotos"}`;
+    qs("#empty").hidden = photos.length > 0; grid.hidden = photos.length === 0;
+  }
+  photos = await store.listPhotos(code); render();
+  store.subscribe(code, (p) => { if (p.hidden || photos.some((x) => x.id === p.id)) return; photos.unshift(p); render(p.id); });
+  // Refresco periódico por si se pierde algún evento en tiempo real
+  setInterval(async () => { const fresh = await store.listPhotos(code).catch(() => null); if (fresh && fresh.length !== photos.length) { photos = fresh; render(fresh[0] && fresh[0].id); } }, 20000);
+  // Rotación suave: cada 12 s mueve una foto antigua al frente para que la pared no se quede quieta
+  setInterval(() => { if (photos.length > MAX) { const i = MAX + Math.floor(Math.random() * (photos.length - MAX)); const [p] = photos.splice(i, 1); photos.splice(1, 0, p); render(p.id); } }, 12000);
+})();
+</script>
+</body>
+</html>

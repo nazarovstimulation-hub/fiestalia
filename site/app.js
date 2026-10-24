@@ -50,7 +50,7 @@
           <li>${check}<span>Álbum disponible ${p.months} ${p.months === 1 ? "mes" : "meses"}</span></li>
         </ul>
         <div class="plan-spacer"></div>
-        <a class="btn ${p.featured ? "btn-primary" : "btn-ghost"}" href="#">${p.price === 0 ? "Empezar gratis" : "Elegir " + p.name}</a>
+        <a class="btn ${p.featured ? "btn-primary" : "btn-ghost"}" href="app/crear.html?plan=${p.id}">${p.price === 0 ? "Empezar gratis" : "Elegir " + p.name}</a>
       </article>`).join("");
   }
   renderPlans();
