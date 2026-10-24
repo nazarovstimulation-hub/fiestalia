@@ -1,0 +1,43 @@
+# Publica la carpeta site/ en GitHub Pages en cada push a main.
+# Activa Pages automáticamente la primera vez (enablement: true). Si fallara por permisos,
+# actívalo a mano: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Publicar Fiestalia en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Activa GitHub Pages (fuente: GitHub Actions) si aún no está activado
+          enablement: true
+      - name: Subir carpeta site/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Desplegar
+        id: deployment
+        uses: actions/deploy-pages@v4

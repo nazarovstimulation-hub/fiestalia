@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-brand-title>Fiestalia — Álbum QR de tu evento con búsqueda por selfie</title>
+  <meta name="description" data-brand-desc content="Tus invitados escanean un QR y suben fotos y vídeos sin instalar nada. Búsqueda por selfie, pantalla en directo y descarga en ZIP. Las primeras 50 fotos, gratis.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" data-brand-title content="Fiestalia — Álbum QR de tu evento">
+  <meta property="og:description" content="Fotos y vídeos de tus invitados en un solo álbum. Sin app, sin registro, pago único.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:image" content="assets/logo.png">
+</head>
+<body>
+
+<!-- ───────── Header ───────── -->
+<header class="header">
+  <div class="container nav" id="nav">
+    <a class="logo" href="#top" aria-label="Fiestalia, inicio">
+      <img src="assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img">
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#precios">Precios</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="#demo">Ver álbum demo</a>
+      <a class="btn btn-primary btn-sm" href="#precios">Crear álbum gratis</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ───────── Hero ───────── -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Álbum QR para bodas, cumpleaños, fiestas y eventos de empresa</span>
+      <h1 style="margin-top:16px">Todas las fotos de tu evento, <em>hechas por tus invitados</em></h1>
+      <p class="lead">Escanean un código QR y suben sus fotos y vídeos al instante, sin instalar nada ni registrarse. Tú lo recibes todo en un álbum privado: con búsqueda por selfie, pantalla en directo y descarga en ZIP.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#precios">Crear mi álbum gratis</a>
+        <a class="btn btn-ghost btn-lg" href="#como-funciona">Ver cómo funciona</a>
+      </div>
+      <ul class="hero-note">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> <span>Las primeras <b data-brand-free>50</b> fotos gratis</span></li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Sin app ni registro</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Pago único, sin suscripción</li>
+      </ul>
+    </div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-top"><span>20:41</span><span>●●● ᯤ ▮</span></div>
+          <div class="phone-title"><strong>Boda de Lucía &amp; Marcos</strong><span>128 fotos · 14 vídeos · 37 invitados</span></div>
+          <div class="feed" id="feed"></div>
+          <div class="upload-btn">＋ Subir fotos y vídeos</div>
+        </div>
+      </div>
+      <div class="qr-card">
+        <svg viewBox="0 0 29 29" shape-rendering="crispEdges" id="qr"></svg>
+        <p>¡Escanea y comparte!</p>
+        <small>Sin app · sin registro</small>
+      </div>
+      <div class="pill-float"><span class="dot"></span> Ana acaba de subir 6 fotos</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Trust strip ───────── -->
+<div class="trust">
+  <div class="container">
+    <ul>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg> Funciona en cualquier móvil</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg> Álbum privado, solo con el QR</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Fotos en el álbum al instante</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg> Descarga todo en calidad original</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg> Cumple el RGPD</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ───────── Cómo funciona ───────── -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2 class="h2">Listo en 2 minutos, sin tecnicismos</h2>
+      <p class="lead">Tú creas el álbum y colocas el QR. Tus invitados hacen el resto.</p>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div>
+        <h3>Crea tu álbum</h3>
+        <p>Ponle nombre, fecha y portada. En 2 minutos tienes tu QR y un enlace listos para compartir.</p>
+      </article>
+      <article class="step">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 15H4v-6h16v6h-2M6 13h12v8H6z"/></svg></div>
+        <h3>Imprime el QR</h3>
+        <p>Descarga la tarjeta lista para imprimir y ponla en las mesas, en la barra o en las invitaciones.</p>
+      </article>
+      <article class="step">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div>
+        <h3>Los invitados suben</h3>
+        <p>Escanean con la cámara del móvil y suben fotos y vídeos directamente desde el navegador. Sin app, sin cuenta.</p>
+      </article>
+      <article class="step">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></div>
+        <h3>Disfruta y descarga</h3>
+        <p>Revive el evento en la galería, encuentra tus fotos con una selfie y descárgalo todo en un ZIP.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Funciones ───────── -->
+<section class="section features-bg" id="funciones">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Funciones</span>
+      <h2 class="h2">Mucho más que una carpeta compartida</h2>
+      <p class="lead">Todo lo que echabas en falta en WhatsApp, Google Fotos o las apps que nadie quiere instalar.</p>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM18 18h3v3h-3z"/></svg></div>
+        <h3>QR sin app</h3>
+        <p>Los invitados escanean y suben desde el navegador. Funciona en iPhone y Android, sin descargas ni contraseñas.</p>
+      </article>
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/><path d="M3 8V5a2 2 0 012-2h3M21 8V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3M21 16v3a2 2 0 01-2 2h-3"/></svg></div>
+        <h3>Búsqueda por selfie <span class="tag">IA</span></h3>
+        <p>Cada invitado se hace una selfie y recibe al momento todas las fotos en las que aparece. Nadie más vuelve a pedir «¿me pasas las fotos?».</p>
+      </article>
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Pantalla en directo <span class="tag">Live Wall</span></h3>
+        <p>Las fotos aparecen en la pantalla o el proyector del salón según se suben. Los invitados se ven, se animan y siguen disparando.</p>
+      </article>
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+        <h3>Galería en tiempo real</h3>
+        <p>Un feed compartido donde todos ven lo que suben los demás durante la fiesta. Con «me gusta» y comentarios.</p>
+      </article>
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg></div>
+        <h3>Descarga en ZIP</h3>
+        <p>Todas las fotos y vídeos en calidad original, con un clic. Sin compresión, sin límite de invitados.</p>
+      </article>
+      <article class="feature">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></div>
+        <h3>Privado y moderado</h3>
+        <p>Solo quien tiene el QR puede entrar. Tú puedes ocultar fotos, cerrar las subidas y borrar el álbum cuando quieras.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Live Wall ───────── -->
+<section class="section livewall" id="demo">
+  <div class="container livewall-grid">
+    <div>
+      <span class="eyebrow">Live Wall</span>
+      <h2 class="h2">Convierte a todo el salón en tu fotógrafo</h2>
+      <p class="lead">Un invitado hace una foto y la sube. Aparece en la pantalla del salón. Los demás la ven, se ríen… y sacan el móvil. Así es como un álbum pasa de 50 fotos a 1.500 en una noche.</p>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Funciona con cualquier TV, proyector o pantalla LED: solo necesitas un navegador.</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> El maestro de ceremonias lo anuncia una vez y el álbum se llena solo.</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Modo presentación con el QR siempre visible y moderación previa opcional.</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#precios">Incluido en Celebración y Gran evento</a>
+      </div>
+    </div>
+    <div class="screen" aria-hidden="true">
+      <div class="screen-bar"><b>Boda de Lucía &amp; Marcos</b><span class="live"><i></i> EN DIRECTO</span></div>
+      <div class="wall" id="wall"></div>
+      <div class="screen-foot">Escanea el QR de tu mesa y <b>aparece aquí</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Eventos ───────── -->
+<section class="section" id="eventos">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Para cualquier celebración</span>
+      <h2 class="h2">Donde hay invitados, hay fotos que se pierden</h2>
+    </div>
+    <div class="events">
+      <div class="event"><div class="emoji">💍</div><h3>Bodas</h3><p>El álbum que el fotógrafo no puede hacer</p></div>
+      <div class="event"><div class="emoji">🎂</div><h3>Cumpleaños</h3><p>De los 1 a los 90</p></div>
+      <div class="event"><div class="emoji">🕊️</div><h3>Comuniones y bautizos</h3><p>Toda la familia en un sitio</p></div>
+      <div class="event"><div class="emoji">👑</div><h3>Quinceañeras</h3><p>Fiesta de 15 inolvidable</p></div>
+      <div class="event"><div class="emoji">🎓</div><h3>Graduaciones</h3><p>Orlas y fiestas de fin de curso</p></div>
+      <div class="event"><div class="emoji">🏢</div><h3>Eventos de empresa</h3><p>Cenas de Navidad, team building, congresos</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Comparativa ───────── -->
+<section class="section-tight" id="comparativa">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Comparativa</span>
+      <h2 class="h2">¿Por qué no un grupo de WhatsApp?</h2>
+    </div>
+    <div class="compare">
+      <table>
+        <thead>
+          <tr><th></th><th class="us" data-brand>Fiestalia</th><th>Grupo de WhatsApp</th><th>Google Fotos / Drive</th><th>Apps de boda</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sin instalar nada</td><td class="us yes">✓</td><td class="so">Casi todos lo tienen</td><td class="no">Requiere cuenta Google</td><td class="no">App obligatoria</td></tr>
+          <tr><td>Calidad original</td><td class="us yes">✓</td><td class="no">Comprime fotos y vídeos</td><td class="yes">✓</td><td class="so">Depende</td></tr>
+          <tr><td>Búsqueda por selfie</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><td>Pantalla en directo</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="so">Pocas</td></tr>
+          <tr><td>Privado, solo con QR</td><td class="us yes">✓</td><td class="no">Expone tu número</td><td class="so">Enlace público o permisos manuales</td><td class="yes">✓</td></tr>
+          <tr><td>Descarga todo en ZIP</td><td class="us yes">✓</td><td class="no">Foto a foto</td><td class="yes">✓</td><td class="so">Depende</td></tr>
+          <tr><td>Precio</td><td class="us">Gratis hasta <span data-brand-free>50</span> fotos · pago único</td><td class="yes">Gratis</td><td class="so">Gratis hasta 15 GB</td><td class="so">Suscripción o 30–60 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Precios ───────── -->
+<section class="section pricing-bg" id="precios">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Precios</span>
+      <h2 class="h2">Pago único. Sin suscripciones. Sin sorpresas.</h2>
+      <p class="lead">Empieza gratis y amplía solo si tu álbum lo necesita. Pagas por volumen de fotos, no por número de invitados.</p>
+    </div>
+
+    <div class="calc">
+      <div class="calc-row">
+        <label for="guests">¿Cuántos invitados tendrás?</label>
+        <output id="guestsOut" for="guests">60 invitados</output>
+      </div>
+      <input type="range" id="guests" min="5" max="300" step="5" value="60">
+      <p class="calc-result" id="calcResult"></p>
+    </div>
+
+    <div class="plans" id="plans"></div>
+    <p class="pricing-foot">Precios con IVA incluido. Pago seguro con tarjeta, Bizum, Apple Pay o Google Pay. El álbum se activa al instante tras el pago.</p>
+  </div>
+</section>
+
+<!-- ───────── Testimonios ───────── -->
+<section class="section" id="opiniones">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Opiniones</span>
+      <h2 class="h2">Lo que dicen quienes ya lo han probado</h2>
+    </div>
+    <div class="quotes">
+      <article class="quote">
+        <p>Pusimos el QR en cada mesa y al día siguiente teníamos 1.200 fotos. Mi abuela de 84 años subió las suyas sin ayuda.</p>
+        <footer><div class="avatar" style="--c:#fde2dc">L</div><div><b>Lucía y Marcos</b><span>Boda · Sevilla</span></div></footer>
+      </article>
+      <article class="quote">
+        <p>La pantalla en directo fue el éxito de la noche. La gente se levantaba a hacerse fotos solo para verse en la pantalla.</p>
+        <footer><div class="avatar" style="--c:#fff1cc">D</div><div><b>Daniel</b><span>Cumpleaños 40 · Valencia</span></div></footer>
+      </article>
+      <article class="quote">
+        <p>Lo uso en todos los eventos que organizo. Los clientes se van con el álbum el mismo día y a mí me ahorra horas de WhatsApp.</p>
+        <footer><div class="avatar" style="--c:#e3f3ec">C</div><div><b>Carla</b><span>Wedding planner · Barcelona</span></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FAQ ───────── -->
+<section class="section-tight" id="faq">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="h2">Todo lo que querrás saber</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>¿Mis invitados tienen que instalar algo o registrarse?</summary>
+        <p>No. Escanean el QR con la cámara del móvil, se abre el álbum en el navegador y ya pueden subir fotos y vídeos. Solo les pedimos un nombre para saber quién ha subido cada foto.</p>
+      </details>
+      <details>
+        <summary>¿Hay límite de invitados?</summary>
+        <p>No. Pagas solo por el volumen del álbum (fotos y gigabytes), no por personas. El número de invitados que aparece junto a cada plan es solo una orientación: calculamos unas <span data-brand-ppg>25</span> fotos por invitado para ayudarte a elegir.</p>
+      </details>
+      <details>
+        <summary>¿Cómo funciona la búsqueda por selfie? ¿Es seguro?</summary>
+        <p>El invitado se hace una selfie y le mostramos las fotos del álbum en las que aparece. La comparación se hace solo dentro de tu álbum: no identificamos a nadie ni cruzamos datos con otros eventos o bases externas. Es una función opcional: cada invitado la activa con su consentimiento expreso, la selfie se elimina en cuanto termina la búsqueda y tú puedes desactivarla para todo el álbum. Más detalles en nuestra <a href="#privacidad">política de privacidad</a>.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa cuando llego a las <span data-brand-free>50</span> fotos gratis?</summary>
+        <p>El álbum sigue visible, pero las nuevas subidas quedan en espera hasta que amplías el plan. Puedes ampliar en cualquier momento, incluso durante el evento, y las fotos en espera se publican automáticamente.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tiempo se guarda el álbum?</summary>
+        <p>Depende del plan: de 1 a 24 meses. Antes de que caduque te avisamos por correo para que descargues el ZIP completo o amplíes el almacenamiento. También puedes borrarlo tú antes.</p>
+      </details>
+      <details>
+        <summary>¿Puedo subir vídeos?</summary>
+        <p>Sí. Fotos y vídeos cuentan igual como «elementos» del álbum; el tamaño máximo por vídeo depende del plan. Se guardan en calidad original, sin compresión.</p>
+      </details>
+      <details>
+        <summary>¿Cómo pongo el Live Wall en la pantalla del salón?</summary>
+        <p>Abre el enlace de presentación en cualquier portátil, Smart TV o reproductor conectado al proyector. No hace falta instalar nada: es una página web a pantalla completa que se actualiza sola.</p>
+      </details>
+      <details>
+        <summary>¿Dónde se almacenan las fotos?</summary>
+        <p>En servidores dentro de la Unión Europea, cifradas y accesibles únicamente mediante el enlace de tu álbum. Cumplimos el RGPD y la LOPDGDD y nunca usamos tus fotos para nada que no sea mostrártelas a ti y a tus invitados.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="section">
+  <div class="container">
+    <div class="cta">
+      <h2>Tu próximo evento merece todas sus fotos</h2>
+      <p>Crea el álbum ahora, imprime el QR y olvídate del resto. Las primeras <span data-brand-free>50</span> fotos son gratis.</p>
+      <a class="btn btn-light btn-lg" href="#precios">Crear mi álbum gratis</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ───────── Footer ───────── -->
+<footer class="footer" id="privacidad">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo logo-footer" href="#top" aria-label="Fiestalia, inicio"><img src="assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+        <p style="margin-top:14px;max-width:320px" data-brand-tagline>El álbum de tu evento, hecho por tus invitados.</p>
+        <p class="muted" style="margin-top:10px;font-size:14px" data-brand-city>Madrid, España</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#funciones">Funciones</a></li>
+          <li><a href="#demo">Live Wall</a></li>
+          <li><a href="#precios">Precios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Para</h4>
+        <ul>
+          <li><a href="#eventos">Bodas</a></li>
+          <li><a href="#eventos">Cumpleaños y comuniones</a></li>
+          <li><a href="#eventos">Empresas y congresos</a></li>
+          <li><a href="#eventos">Wedding planners y fotógrafos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto y legal</h4>
+        <ul>
+          <li><a data-brand-email href="mailto:hola@fiestalia.com">hola@fiestalia.com</a></li>
+          <li><a data-brand-whatsapp href="#">WhatsApp</a></li>
+          <li><a href="#">Aviso legal</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Política de cookies</a></li>
+          <li><a href="#">Condiciones de uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> <span data-brand>Fiestalia</span>. Todos los derechos reservados.</span>
+      <span>Hecho con cariño en España 🇪🇸</span>
+    </div>
+  </div>
+</footer>
+
+<script src="brand.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
