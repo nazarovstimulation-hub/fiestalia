@@ -175,9 +175,10 @@
     async createAlbum(data) {
       const adminKey = rand(20);
       const rec = newAlbumRecord(data, await sha256(adminKey));
-      const { data: row, error } = await this.sb.from("albums").insert(rec).select("*").single();
+      // Sin .select(): la tabla albums no es legible directamente (RLS); ya tenemos todos los datos en rec
+      const { error } = await this.sb.from("albums").insert(rec);
       if (error) throw error;
-      return { album: this._pub(row), adminKey };
+      return { album: this._pub(rec), adminKey };
     }
     _pub(a) { if (!a) return null; const { admin_key_hash, ...rest } = a; return rest; }
     async getAlbum(code) {

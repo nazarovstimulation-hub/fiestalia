@@ -167,9 +167,16 @@ insert into storage.buckets (id, name, public, file_size_limit)
 drop policy if exists media_read on storage.objects;
 create policy media_read on storage.objects for select to anon, authenticated using (bucket_id = 'media');
 
+-- La política no puede leer public.albums directamente (anon no tiene SELECT), así que usa una función security definer
+create or replace function public.album_accepts_uploads(p_code text)
+returns boolean language sql security definer set search_path = public stable as $$
+  select exists (select 1 from albums a where a.code = p_code and a.uploads_open and a.expires_at > now());
+$$;
+grant execute on function public.album_accepts_uploads(text) to anon, authenticated;
+
 drop policy if exists media_insert on storage.objects;
 create policy media_insert on storage.objects for insert to anon, authenticated
-  with check (bucket_id = 'media' and exists (select 1 from public.albums a where a.code = split_part(name, '/', 1) and a.uploads_open));
+  with check (bucket_id = 'media' and public.album_accepts_uploads(split_part(name, '/', 1)));
 
 -- El borrado de objetos lo hace el cliente tras photo_delete; se permite dentro del bucket.
 -- (Para endurecerlo, mover el borrado a una Edge Function con service role.)
