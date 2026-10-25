@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta property="og:image" content="assets/logo.png">
@@ -26,12 +27,13 @@
     </a>
     <nav class="nav-links" aria-label="Principal">
       <a href="#como-funciona">Cómo funciona</a>
-      <a href="#funciones">Funciones</a>
       <a href="#precios">Precios</a>
+      <a href="bodas.html">Bodas</a>
+      <a href="profesionales.html">Profesionales</a>
       <a href="#faq">Preguntas</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost btn-sm" href="#demo">Ver álbum demo</a>
+      <a class="btn btn-ghost btn-sm" href="contacto.html">Contacto</a>
       <a class="btn btn-primary btn-sm" href="app/crear.html">Crear álbum gratis</a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -198,12 +200,12 @@
       <h2 class="h2">Donde hay invitados, hay fotos que se pierden</h2>
     </div>
     <div class="events">
-      <div class="event"><div class="emoji">💍</div><h3>Bodas</h3><p>El álbum que el fotógrafo no puede hacer</p></div>
-      <div class="event"><div class="emoji">🎂</div><h3>Cumpleaños</h3><p>De los 1 a los 90</p></div>
-      <div class="event"><div class="emoji">🕊️</div><h3>Comuniones y bautizos</h3><p>Toda la familia en un sitio</p></div>
-      <div class="event"><div class="emoji">👑</div><h3>Quinceañeras</h3><p>Fiesta de 15 inolvidable</p></div>
-      <div class="event"><div class="emoji">🎓</div><h3>Graduaciones</h3><p>Orlas y fiestas de fin de curso</p></div>
-      <div class="event"><div class="emoji">🏢</div><h3>Eventos de empresa</h3><p>Cenas de Navidad, team building, congresos</p></div>
+      <a class="event" href="bodas.html"><div class="emoji">💍</div><h3>Bodas</h3><p>El álbum que el fotógrafo no puede hacer</p></a>
+      <a class="event" href="cumpleanos.html"><div class="emoji">🎂</div><h3>Cumpleaños</h3><p>De los 1 a los 90</p></a>
+      <a class="event" href="comuniones.html"><div class="emoji">🕊️</div><h3>Comuniones y bautizos</h3><p>Toda la familia en un sitio</p></a>
+      <a class="event" href="quinceaneras.html"><div class="emoji">👑</div><h3>Quinceañeras</h3><p>Fiesta de 15 inolvidable</p></a>
+      <a class="event" href="empresas.html"><div class="emoji">🎓</div><h3>Graduaciones</h3><p>Orlas y fiestas de fin de curso</p></a>
+      <a class="event" href="empresas.html"><div class="emoji">🏢</div><h3>Eventos de empresa</h3><p>Cenas de Navidad, team building, congresos</p></a>
     </div>
   </div>
 </section>
@@ -268,6 +270,131 @@
       <article class="quote">
         <p>Pusimos el QR en cada mesa y al día siguiente teníamos 1.200 fotos. Mi abuela de 84 años subió las suyas sin ayuda.</p>
         <footer><div class="avatar" style="--c:#fde2dc">L</div><div><b>Lucía y Marcos</b><span>Boda · Sevilla</span></div></footer>
+      </article>
+      <article class="quote">
+        <p>La pantalla en directo fue el éxito de la noche. La gente se levantaba a hacerse fotos solo para verse en la pantalla.</p>
+        <footer><div class="avatar" style="--c:#fff1cc">D</div><div><b>Daniel</b><span>Cumpleaños 40 · Valencia</span></div></footer>
+      </article>
+      <article class="quote">
+        <p>Lo uso en todos los eventos que organizo. Los clientes se van con el álbum el mismo día y a mí me ahorra horas de WhatsApp.</p>
+        <footer><div class="avatar" style="--c:#e3f3ec">C</div><div><b>Carla</b><span>Wedding planner · Barcelona</span></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FAQ ───────── -->
+<section class="section-tight" id="faq">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="h2">Todo lo que querrás saber</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>¿Mis invitados tienen que instalar algo o registrarse?</summary>
+        <p>No. Escanean el QR con la cámara del móvil, se abre el álbum en el navegador y ya pueden subir fotos y vídeos. Solo les pedimos un nombre para saber quién ha subido cada foto.</p>
+      </details>
+      <details>
+        <summary>¿Hay límite de invitados?</summary>
+        <p>No. Pagas solo por el volumen del álbum (fotos y gigabytes), no por personas. El número de invitados que aparece junto a cada plan es solo una orientación: calculamos unas <span data-brand-ppg>25</span> fotos por invitado para ayudarte a elegir.</p>
+      </details>
+      <details>
+        <summary>¿Cómo funciona la búsqueda por selfie? ¿Es seguro?</summary>
+        <p>El invitado se hace una selfie y le mostramos las fotos del álbum en las que aparece. La comparación se hace solo dentro de tu álbum: no identificamos a nadie ni cruzamos datos con otros eventos o bases externas. Es una función opcional: cada invitado la activa con su consentimiento expreso, la selfie se elimina en cuanto termina la búsqueda y tú puedes desactivarla para todo el álbum. Más detalles en nuestra <a href="legal/privacidad.html#biometria">política de privacidad</a>.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa cuando llego a las <span data-brand-free>50</span> fotos gratis?</summary>
+        <p>El álbum sigue visible, pero las nuevas subidas quedan en espera hasta que amplías el plan. Puedes ampliar en cualquier momento, incluso durante el evento, y las fotos en espera se publican automáticamente.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tiempo se guarda el álbum?</summary>
+        <p>Depende del plan: de 1 a 24 meses. Antes de que caduque te avisamos por correo para que descargues el ZIP completo o amplíes el almacenamiento. También puedes borrarlo tú antes.</p>
+      </details>
+      <details>
+        <summary>¿Puedo subir vídeos?</summary>
+        <p>Sí. Fotos y vídeos cuentan igual como «elementos» del álbum; el tamaño máximo por vídeo depende del plan. Se guardan en calidad original, sin compresión.</p>
+      </details>
+      <details>
+        <summary>¿Cómo pongo el Live Wall en la pantalla del salón?</summary>
+        <p>Abre el enlace de presentación en cualquier portátil, Smart TV o reproductor conectado al proyector. No hace falta instalar nada: es una página web a pantalla completa que se actualiza sola.</p>
+      </details>
+      <details>
+        <summary>¿Dónde se almacenan las fotos?</summary>
+        <p>En servidores dentro de la Unión Europea, cifradas y accesibles únicamente mediante el enlace de tu álbum. Cumplimos el RGPD y la LOPDGDD y nunca usamos tus fotos para nada que no sea mostrártelas a ti y a tus invitados.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="section">
+  <div class="container">
+    <div class="cta">
+      <h2>Tu próximo evento merece todas sus fotos</h2>
+      <p>Crea el álbum ahora, imprime el QR y olvídate del resto. Las primeras <span data-brand-free>50</span> fotos son gratis.</p>
+      <a class="btn btn-light btn-lg" href="app/crear.html">Crear mi álbum gratis</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ───────── Footer ───────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid-5">
+      <div>
+        <a class="logo logo-footer" href="#top" aria-label="Fiestalia, inicio"><img src="assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+        <p style="margin-top:14px;max-width:320px" data-brand-tagline>El álbum de tu evento, hecho por tus invitados.</p>
+        <p class="muted" style="margin-top:10px;font-size:14px" data-brand-city>Alcobendas, Madrid, España</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#funciones">Funciones</a></li>
+          <li><a href="#demo">Live Wall</a></li>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Para</h4>
+        <ul>
+          <li><a href="bodas.html">Bodas</a></li>
+          <li><a href="cumpleanos.html">Cumpleaños</a></li>
+          <li><a href="comuniones.html">Comuniones y bautizos</a></li>
+          <li><a href="quinceaneras.html">Quinceañeras</a></li>
+          <li><a href="empresas.html">Eventos de empresa</a></li>
+          <li><a href="profesionales.html">Profesionales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a data-brand-email href="mailto:exp.span.group@gmail.com">exp.span.group@gmail.com</a></li>
+          <li><a data-brand-whatsapp href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal/aviso-legal.html">Aviso legal</a></li>
+          <li><a href="legal/privacidad.html">Política de privacidad</a></li>
+          <li><a href="legal/cookies.html">Política de cookies</a></li>
+          <li><a href="legal/condiciones.html">Condiciones de uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> <span data-brand>Fiestalia</span> · SYNTH MASHI, S.L. Todos los derechos reservados.</span>
+      <span>Hecho con cariño en España 🇪🇸</span>
+    </div>
+  </div>
+</footer>
       </article>
       <article class="quote">
         <p>La pantalla en directo fue el éxito de la noche. La gente se levantaba a hacerse fotos solo para verse en la pantalla.</p>

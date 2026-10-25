@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto — Fiestalia</title>
+  <meta name="description" content="Escríbenos por WhatsApp o correo. Respondemos en español, normalmente el mismo día. SYNTH MASHI, S.L., Alcobendas, Madrid.">
+  <link rel="canonical" href="https://fiestalia.com/contacto.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contacto — Fiestalia">
+  <meta property="og:description" content="Escríbenos por WhatsApp o correo. Respondemos en español, normalmente el mismo día. SYNTH MASHI, S.L., Alcobendas, Madrid.">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pages.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  
+</head>
+<body>
+<header class="header">
+  <div class="container nav" id="nav">
+    <a class="logo" href="index.html" aria-label="Fiestalia, inicio"><img src="assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+    <nav class="nav-links" aria-label="Principal"><a href="index.html#como-funciona">Cómo funciona</a><a href="index.html#precios">Precios</a><a href="bodas.html">Bodas</a><a href="profesionales.html">Profesionales</a><a href="index.html#faq">Preguntas</a></nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="contacto.html">Contacto</a>
+      <a class="btn btn-primary btn-sm" href="app/crear.html">Crear álbum gratis</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero hero-page hero-compact">
+  <div class="container narrow-text">
+    <span class="eyebrow">Contacto</span>
+    <h1 style="margin-top:16px">Hablamos cuando quieras, <em>en español</em></h1>
+    <p class="lead">Dudas sobre un álbum, un evento grande, un pack para profesionales o una sugerencia. Te responde una persona, normalmente el mismo día laborable.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container contact-grid">
+    <div class="card-plain">
+      <h3>Escríbenos</h3>
+      <form id="contactForm" novalidate>
+        <div class="field"><label for="cName">Tu nombre *</label><input id="cName" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="cEmail">Tu correo *</label><input id="cEmail" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="cSubject">Asunto</label>
+          <select id="cSubject">
+            <option value="duda">Tengo una duda sobre el servicio</option>
+            <option value="evento">Quiero usarlo en mi evento</option>
+            <option value="profesional">Soy profesional (planner, fotógrafo, salón, agencia)</option>
+            <option value="pack">Quiero un pack para profesionales</option>
+            <option value="empresa">Evento de empresa / factura</option>
+            <option value="privacidad">Protección de datos / eliminar fotos</option>
+            <option value="sugerencia">Sugerencia o problema técnico</option>
+          </select></div>
+        <div class="field"><label for="cMsg">Mensaje *</label><textarea id="cMsg" required maxlength="2000" rows="6" placeholder="Cuéntanos qué necesitas: fecha del evento, número de invitados, lo que te preocupa…"></textarea></div>
+        <label class="check"><input type="checkbox" id="cAccept" required> <span>He leído la <a href="legal/privacidad.html" target="_blank">política de privacidad</a>. Usaremos tus datos solo para responderte. *</span></label>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Enviar por correo</button>
+          <button class="btn btn-ghost" type="button" id="sendWa">Enviar por WhatsApp</button>
+        </div>
+        <p class="muted" style="margin-top:12px;font-size:13px">El botón de correo abre tu aplicación de correo con el mensaje preparado. El de WhatsApp abre un chat con nosotros con el texto listo para enviar.</p>
+      </form>
+    </div>
+    <div>
+      <div class="contact-card">
+        <h3>WhatsApp</h3>
+        <p>La forma más rápida. Lunes a viernes de 9 a 19 h, y durante los fines de semana de evento.</p>
+        <a class="btn btn-primary" href="https://wa.me/34634118579?text=Hola%2C%20tengo%20una%20consulta%20sobre%20Fiestalia" target="_blank" rel="noopener">+34 634 118 579</a>
+      </div>
+      <div class="contact-card">
+        <h3>Correo electrónico</h3>
+        <p>Para presupuestos, facturas y protección de datos.</p>
+        <a class="btn btn-ghost" href="mailto:exp.span.group@gmail.com">exp.span.group@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <h3>Dirección</h3>
+        <p>SYNTH MASHI, S.L.<br>Travesía Huesca, 8, Piso 0, Puerta 3<br>28100 Alcobendas, Madrid, España<br><span class="muted">NIF B05675947</span></p>
+      </div>
+      <div class="contact-card">
+        <h3>¿Eres invitado y buscas un álbum?</h3>
+        <p>Pide el enlace o el QR a quien organiza el evento. Nosotros no podemos darte acceso a un álbum privado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid-5">
+      <div>
+        <a class="logo logo-footer" href="index.html" aria-label="Fiestalia, inicio"><img src="assets/logo.png" alt="Fiestalia.com" width="900" height="169" class="logo-img"></a>
+        <p style="margin-top:14px;max-width:320px" data-brand-tagline>El álbum de tu evento, hecho por tus invitados.</p>
+        <p class="muted" style="margin-top:10px;font-size:14px" data-brand-city>Alcobendas, Madrid, España</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="index.html#como-funciona">Cómo funciona</a></li>
+          <li><a href="index.html#funciones">Funciones</a></li>
+          <li><a href="index.html#demo">Live Wall</a></li>
+          <li><a href="index.html#precios">Precios</a></li>
+          <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Para</h4>
+        <ul>
+          <li><a href="bodas.html">Bodas</a></li>
+          <li><a href="cumpleanos.html">Cumpleaños</a></li>
+          <li><a href="comuniones.html">Comuniones y bautizos</a></li>
+          <li><a href="quinceaneras.html">Quinceañeras</a></li>
+          <li><a href="empresas.html">Eventos de empresa</a></li>
+          <li><a href="profesionales.html">Profesionales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a data-brand-email href="mailto:exp.span.group@gmail.com">exp.span.group@gmail.com</a></li>
+          <li><a data-brand-whatsapp href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal/aviso-legal.html">Aviso legal</a></li>
+          <li><a href="legal/privacidad.html">Política de privacidad</a></li>
+          <li><a href="legal/cookies.html">Política de cookies</a></li>
+          <li><a href="legal/condiciones.html">Condiciones de uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> <span data-brand>Fiestalia</span> · SYNTH MASHI, S.L. Todos los derechos reservados.</span>
+      <span>Hecho con cariño en España 🇪🇸</span>
+    </div>
+  </div>
+</footer>
+<script src="brand.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>
