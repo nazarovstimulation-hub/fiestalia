@@ -35,3 +35,22 @@
     document.getElementById("sendWa").addEventListener("click", () => { const c = compose(); if (!c) return; window.open(`https://wa.me/${B.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(c.subject + "\n" + c.body)}`, "_blank", "noopener"); });
   }
 })();
+
+// Álbum de ejemplo: lightbox
+(function () {
+  const photos = window.DEMO_PHOTOS; const grid = document.getElementById("demoGrid");
+  if (!photos || !grid) return;
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".ph"); if (!btn) return;
+    let i = +btn.dataset.i;
+    const el = document.createElement("div"); el.className = "lightbox";
+    el.innerHTML = '<button class="lb-close" aria-label="Cerrar">✕</button><button class="lb-prev" aria-label="Anterior">‹</button><div class="lb-body"></div><button class="lb-next" aria-label="Siguiente">›</button><div class="lb-cap"></div>';
+    document.body.appendChild(el); document.body.style.overflow = "hidden";
+    const show = () => { const p = photos[i]; el.querySelector(".lb-body").innerHTML = `<img src="${p.src}" alt="${p.cap}">`; el.querySelector(".lb-cap").innerHTML = `<b>${p.who}</b> · ${p.cap}`; };
+    const close = () => { el.remove(); document.body.style.overflow = ""; document.removeEventListener("keydown", key); };
+    const prev = () => { i = (i - 1 + photos.length) % photos.length; show(); }, next = () => { i = (i + 1) % photos.length; show(); };
+    const key = (ev) => { if (ev.key === "Escape") close(); if (ev.key === "ArrowLeft") prev(); if (ev.key === "ArrowRight") next(); };
+    el.querySelector(".lb-close").onclick = close; el.querySelector(".lb-prev").onclick = prev; el.querySelector(".lb-next").onclick = next;
+    el.addEventListener("click", (ev) => { if (ev.target === el) close(); }); document.addEventListener("keydown", key); show();
+  });
+})();

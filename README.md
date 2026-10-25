@@ -64,4 +64,6 @@ Pendiente para después del MVP: búsqueda por selfie (requiere evaluación de i
 
 ## Páginas públicas
 
-`bodas.html`, `cumpleanos.html`, `comuniones.html`, `quinceaneras.html`, `empresas.html`, `profesionales.html`, `sobre-nosotros.html` y `contacto.html` se generan desde `tools/gen_pages.py` (plantilla común de cabecera y pie, contenido en el propio script). Para cambiar textos: edita el script y ejecuta `python3 tools/gen_pages.py`. Estilos en `site/pages.css`, lógica (menú, FAQ, formulario de contacto) en `site/pages.js`.
+`bodas.html`, `cumpleanos.html`, `comuniones.html`, `quinceaneras.html`, `empresas.html`, `profesionales.html`, `sobre-nosotros.html` y `contacto.html` se generan desde `tools/gen_pages.py`; las guías, el álbum de ejemplo, la 404 y el blog (`blog/`) desde `tools/gen_pages_extra.py` (ejecutar ambos, en ese orden) (plantilla común de cabecera y pie, contenido en el propio script). Para cambiar textos: edita el script y ejecuta `python3 tools/gen_pages.py`. Estilos en `site/pages.css`, lógica (menú, FAQ, formulario de contacto) en `site/pages.js`.
+
+**Álbum de ejemplo.** Las imágenes de `site/assets/demo/` son marcadores de posición generados; sustitúyelas por fotos reales con los mismos nombres (`demo-01.jpg` … `demo-12.jpg` y sus miniaturas `_t.jpg`, lado mayor 480 px) y ajusta los pies en `assets/demo/captions.txt`, después vuelve a ejecutar `tools/gen_pages_extra.py`.
