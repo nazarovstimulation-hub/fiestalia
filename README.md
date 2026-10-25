@@ -67,3 +67,7 @@ Pendiente para después del MVP: búsqueda por selfie (requiere evaluación de i
 `bodas.html`, `cumpleanos.html`, `comuniones.html`, `quinceaneras.html`, `empresas.html`, `profesionales.html`, `sobre-nosotros.html` y `contacto.html` se generan desde `tools/gen_pages.py`; las guías, el álbum de ejemplo, la 404 y el blog (`blog/`) desde `tools/gen_pages_extra.py` (ejecutar ambos, en ese orden) (plantilla común de cabecera y pie, contenido en el propio script). Para cambiar textos: edita el script y ejecuta `python3 tools/gen_pages.py`. Estilos en `site/pages.css`, lógica (menú, FAQ, formulario de contacto) en `site/pages.js`.
 
 **Álbum de ejemplo.** Las imágenes de `site/assets/demo/` son marcadores de posición generados; sustitúyelas por fotos reales con los mismos nombres (`demo-01.jpg` … `demo-12.jpg` y sus miniaturas `_t.jpg`, lado mayor 480 px) y ajusta los pies en `assets/demo/captions.txt`, después vuelve a ejecutar `tools/gen_pages_extra.py`.
+
+## SEO
+
+`tools/site_config.py` guarda la dirección pública del sitio (`SITE_URL`), usada en canonical, Open Graph y sitemap. Al activar el dominio fiestalia.com: cambiar `SITE_URL`, ejecutar `tools/gen_pages.py`, `tools/gen_pages_extra.py` y `tools/gen_seo.py`, y actualizar a mano el `<head>` de `site/index.html`. `tools/gen_seo.py` genera `sitemap.xml` (todas las páginas públicas indexables), `robots.txt` (bloquea `/app/` y `/legal/`) y `assets/og-image.png` (1200×630 para WhatsApp, Facebook, LinkedIn y X).

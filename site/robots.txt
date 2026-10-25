@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+# Los álbumes y el panel son privados: no indexar
+Disallow: /app/
+# Páginas legales sin interés para buscadores
+Disallow: /legal/
+
+Sitemap: https://nazarovstimulation-hub.github.io/fiestalia/sitemap.xml
