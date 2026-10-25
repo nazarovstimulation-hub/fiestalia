@@ -61,7 +61,10 @@ FOOTER = """<footer class="footer">
           <li><a href="index.html#funciones">Funciones</a></li>
           <li><a href="index.html#demo">Live Wall</a></li>
           <li><a href="index.html#precios">Precios</a></li>
-          <li><a href="index.html#faq">Preguntas frecuentes</a></li>
+          <li><a href="demo.html">Álbum de ejemplo</a></li>
+          <li><a href="guia-invitados.html">Guía para invitados</a></li>
+          <li><a href="guia-organizadores.html">Guía para organizadores</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
         </ul>
       </div>
       <div>
