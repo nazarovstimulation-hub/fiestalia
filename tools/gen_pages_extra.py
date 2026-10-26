@@ -3,7 +3,8 @@
 Uso: python3 tools/gen_pages_extra.py"""
 import os, re, json, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_pages import HEAD, header, FOOTER, CHECK, faq_html, faq_jsonld, cta_block, OUT
+from gen_pages import HEAD, header, FOOTER, CHECK, faq_html, faq_jsonld, cta_block, OUT, EVENTS
+from site_config import SITE_URL
 
 def rebase(html_str, prefix):
     """Convierte rutas locales (href/src) para páginas en subcarpetas (p. ej. blog/)."""
@@ -15,10 +16,10 @@ def rebase(html_str, prefix):
     return re.sub(r'\b(href|src)="([^"]+)"', fix, html_str)
 
 def page(file, title, desc, body, jsonld="", active="", prefix=""):
-    html_str = HEAD.format(title=title, desc=desc, file=file, jsonld=jsonld) + header(active) + body + FOOTER
+    html_str = HEAD.format(site=SITE_URL, title=title, desc=desc, file=file, jsonld=jsonld) + header(active) + body + FOOTER
     if prefix:
         html_str = rebase(html_str, prefix)
-        html_str = html_str.replace(f'href="{prefix}https://fiestalia.com/', 'href="https://fiestalia.com/')
+        html_str = html_str.replace(f'"{prefix}{SITE_URL}', f'"{SITE_URL}')
     return html_str
 
 def write(path, content):
@@ -378,3 +379,127 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# ───────────────────────────── Precios ─────────────────────────────
+def precios():
+    faq = [("¿Es una suscripción?", "No. Cada álbum se paga una sola vez y ya está. Sin renovaciones automáticas, sin cuotas mensuales. Si organizas otro evento, creas otro álbum y eliges su plan."),
+           ("¿Qué pasa si me quedo sin fotos a mitad del evento?", "Las nuevas subidas quedan en espera y el panel te avisa. Amplías el plan en un clic desde el móvil y las fotos en espera se publican automáticamente. Nadie pierde nada."),
+           ("¿Puedo empezar gratis y pagar después?", "Sí, es lo habitual. Creas el álbum gratis, imprimes el QR y, si ves que la fiesta va a superar las 50 fotos, pagas el plan cuando quieras, incluso el mismo día."),
+           ("¿El precio incluye IVA?", "Sí, todos los precios se muestran con el IVA incluido. Emitimos factura por cada pago, con tus datos o los de tu empresa."),
+           ("¿Hay límite de invitados?", "No. Pagas por volumen de fotos y gigabytes, no por personas. El número de invitados junto a cada plan es solo una orientación: calculamos unas 25 fotos por invitado."),
+           ("¿Qué medios de pago aceptáis?", "Tarjeta de crédito o débito, Bizum, Apple Pay y Google Pay, a través de una pasarela de pago certificada. No guardamos los datos de tu tarjeta."),
+           ("¿Puedo pedir la devolución?", "Si eres consumidor tienes 14 días para desistir. Como el servicio empieza al momento, si ya has usado el plan de pago podemos descontar la parte proporcional. Los detalles están en las <a href='legal/condiciones.html'>condiciones de uso</a>."),
+           ("Organizo muchos eventos, ¿hay descuento?", "Sí: los <a href='profesionales.html'>packs para profesionales</a> bajan el precio por álbum hasta 20 € e incluyen tu logo en las tarjetas QR y el Live Wall.")]
+    body = f"""
+<main id="top">
+<section class="hero hero-page hero-compact"><div class="container narrow-text center">
+  <span class="eyebrow">Precios</span>
+  <h1 style="margin-top:16px">Pago único. <em>Sin suscripciones.</em> Sin sorpresas.</h1>
+  <p class="lead">Empieza gratis y amplía solo si tu álbum lo necesita. Pagas por volumen de fotos, no por número de invitados. IVA incluido.</p>
+</div></section>
+
+<section class="section-tight pricing-bg" id="precios"><div class="container">
+  <div class="calc">
+    <div class="calc-row"><label for="guests">¿Cuántos invitados tendrás?</label><output id="guestsOut" for="guests">60 invitados</output></div>
+    <input type="range" id="guests" min="5" max="300" step="5" value="60">
+    <p class="calc-result" id="calcResult"></p>
+  </div>
+  <div class="plans" id="plans"></div>
+  <p class="pricing-foot">Precios con IVA incluido. Pago seguro con tarjeta, Bizum, Apple Pay o Google Pay. El álbum se activa al instante tras el pago.</p>
+</div></section>
+
+<section class="section-tight"><div class="container">
+  <div class="center"><span class="eyebrow">Qué incluye cada plan</span><h2 class="h2">Compara los planes</h2></div>
+  <div class="compare"><table>
+    <thead><tr><th></th><th>Gratis</th><th>Básico</th><th class="us">Celebración</th><th>Gran evento</th></tr></thead>
+    <tbody>
+      <tr><td>Precio</td><td>0 €</td><td>19 €</td><td class="us">39 €</td><td>69 €</td></tr>
+      <tr><td>Fotos y vídeos</td><td>50</td><td>500</td><td class="us">1.500</td><td>5.000</td></tr>
+      <tr><td>Almacenamiento</td><td>500 MB</td><td>5 GB</td><td class="us">20 GB</td><td>60 GB</td></tr>
+      <tr><td>Álbum disponible</td><td>1 mes</td><td>6 meses</td><td class="us">12 meses</td><td>24 meses</td></tr>
+      <tr><td>Invitados</td><td colspan="4" style="text-align:center">Sin límite en todos los planes</td></tr>
+      <tr><td>Galería privada con QR y enlace</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Subida sin app ni registro</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Calidad original y descarga en ZIP</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Moderación previa</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Tarjetas QR imprimibles</td><td class="yes">✓</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Live Wall en pantalla</td><td class="no">—</td><td class="no">—</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Tamaño máximo por vídeo</td><td>200 MB</td><td>200 MB</td><td class="us">200 MB</td><td>200 MB</td></tr>
+      <tr><td>Búsqueda por selfie</td><td colspan="4" style="text-align:center" class="so">Próximamente, con consentimiento del invitado</td></tr>
+      <tr><td>Factura</td><td class="so">—</td><td class="yes">✓</td><td class="us yes">✓</td><td class="yes">✓</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="section-tight"><div class="container narrow-text center">
+  <span class="eyebrow">Para profesionales</span>
+  <h2 class="h2">¿Más de cinco eventos al año?</h2>
+  <p class="lead">Los packs para wedding planners, fotógrafos, salones y agencias bajan el precio por álbum hasta 20 € e incluyen tu logo en las tarjetas y el Live Wall.</p>
+  <div class="actions" style="justify-content:center"><a class="btn btn-primary" href="profesionales.html">Ver packs profesionales</a></div>
+</div></section>
+
+<section class="section-tight"><div class="container">
+  <div class="center"><span class="eyebrow">Preguntas sobre precios y pago</span><h2 class="h2">Lo que suelen preguntar</h2></div>
+  {faq_html(faq)}
+</div></section>
+{cta_block("Empieza gratis hoy", "Crea el álbum, imprime el QR y decide el plan cuando lo necesites.")}
+</main>
+"""
+    html_str = page("precios.html", "Precios — Fiestalia: álbum QR desde 0 €, pago único sin suscripción", "Planes de Fiestalia: gratis hasta 50 fotos, Básico 19 €, Celebración 39 € con Live Wall y Gran evento 69 €. Pago único con IVA, sin suscripción ni límite de invitados.", body, faq_jsonld(faq), active="precios.html")
+    # Esta página reutiliza el calculador y las tarjetas de planes de la landing (app.js) en lugar de pages.js
+    return html_str.replace('<script src="pages.js"></script>', '<script src="app.js"></script>')
+
+# ───────────────────────────── Preguntas frecuentes ─────────────────────────────
+GENERAL_FAQ = [
+    ("¿Mis invitados tienen que instalar algo o registrarse?", "No. Escanean el QR con la cámara del móvil, se abre el álbum en el navegador y ya pueden subir fotos y vídeos. Solo les pedimos un nombre para saber quién ha subido cada foto."),
+    ("¿Hay límite de invitados?", "No. Pagas solo por el volumen del álbum (fotos y gigabytes), no por personas. El número de invitados que aparece junto a cada plan es una orientación: calculamos unas 25 fotos por invitado."),
+    ("¿Cómo funciona la búsqueda por selfie? ¿Es seguro?", "El invitado se hace una selfie y le mostramos las fotos del álbum en las que aparece. La comparación se hace solo dentro del álbum, no identificamos a nadie ni cruzamos datos con otros eventos. Es opcional, requiere consentimiento expreso y la selfie se elimina al terminar. Está en desarrollo; más detalles en la <a href='legal/privacidad.html#biometria'>política de privacidad</a>."),
+    ("¿Qué pasa cuando llego a las 50 fotos gratis?", "El álbum sigue visible, pero las nuevas subidas quedan en espera hasta que amplías el plan. Puedes ampliar en cualquier momento, incluso durante el evento, y las fotos en espera se publican automáticamente."),
+    ("¿Cuánto tiempo se guarda el álbum?", "Depende del plan: de 1 a 24 meses. Antes de que caduque te avisamos por correo para que descargues el ZIP completo o amplíes el almacenamiento."),
+    ("¿Puedo subir vídeos?", "Sí. Fotos y vídeos cuentan igual como elementos del álbum, hasta 200 MB por vídeo. Se guardan en calidad original, sin compresión."),
+    ("¿Cómo pongo el Live Wall en la pantalla del salón?", "Abre el enlace de presentación en cualquier portátil, Smart TV o reproductor conectado al proyector. Es una página web a pantalla completa que se actualiza sola. Hay una <a href='guia-organizadores.html'>guía detallada</a>."),
+    ("¿Dónde se almacenan las fotos?", "En servidores dentro de la Unión Europea, cifradas y accesibles únicamente mediante el enlace de tu álbum. Cumplimos el RGPD y la LOPDGDD."),
+    ("¿Es legal recoger las fotos de los invitados?", "Sí, siempre que les informes de que el evento se fotografía y se comparte en un álbum privado. En la <a href='guia-organizadores.html'>guía para organizadores</a> hay un texto modelo para la tarjeta QR."),
+    ("He perdido el enlace del panel, ¿qué hago?", "Si creaste el álbum desde este mismo navegador, en <a href='app/crear.html'>Crear álbum</a> verás la lista de tus álbumes con el acceso al panel. Si no, escríbenos desde la página de <a href='contacto.html'>contacto</a> con el correo que usaste al crearlo y te ayudamos a recuperarlo."),
+]
+
+def faq_page():
+    groups = [("general", "Sobre el servicio", GENERAL_FAQ)]
+    for ev in EVENTS:
+        groups.append((ev["file"].replace(".html", ""), ev["eyebrow"].replace("Álbum QR para ", "").capitalize(), ev["faq"]))
+    all_items = [q for _, _, items in groups for q in items]
+    toc = "".join(f'<a href="#{gid}">{title}</a>' for gid, title, _ in groups)
+    secs = "".join(f'<section class="faq-group" id="{gid}"><h2 class="h2">{title}</h2>{faq_html(items, open_first=False)}</section>' for gid, title, items in groups)
+    body = f"""
+<main id="top">
+<section class="hero hero-page hero-compact"><div class="container narrow-text center">
+  <span class="eyebrow">Preguntas frecuentes</span>
+  <h1 style="margin-top:16px">Todo lo que querrás saber, <em>en un solo sitio</em></h1>
+  <p class="lead">Las preguntas que nos hacen parejas, familias, empresas y profesionales. Si la tuya no está, <a href="contacto.html">escríbenos</a> y la añadimos.</p>
+  <nav class="faq-toc" aria-label="Secciones">{toc}</nav>
+</div></section>
+<section class="section-tight"><div class="container narrow-text">{secs}</div></section>
+{cta_block("¿Resuelto? Pues a por el álbum", "Crea el tuyo en dos minutos. Las primeras 50 fotos son gratis.")}
+</main>
+"""
+    return page("faq.html", "Preguntas frecuentes — Fiestalia", "Respuestas a las dudas más habituales sobre el álbum QR de Fiestalia: invitados, límites, privacidad, Live Wall, vídeos, caducidad y casos por tipo de evento.", body, faq_jsonld(all_items), active="faq.html")
+
+FAQ_CSS = """
+/* FAQ */
+.faq-toc { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 22px; }
+.faq-toc a { font-size: 14px; font-weight: 700; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink-2); }
+.faq-toc a:hover { border-color: var(--brand); color: var(--brand); }
+.faq-group + .faq-group { margin-top: 48px; }
+.faq-group .h2 { margin-bottom: 8px; }
+.faq-group .faq { margin-top: 16px; }
+"""
+
+def main_more():
+    write("precios.html", precios())
+    write("faq.html", faq_page())
+    css = open(os.path.join(OUT, "pages.css"), encoding="utf-8").read()
+    if "/* FAQ */" not in css: open(os.path.join(OUT, "pages.css"), "a", encoding="utf-8").write(FAQ_CSS)
+    print("precios.html, faq.html generated")
+
+if __name__ == "__main__":
+    main_more()

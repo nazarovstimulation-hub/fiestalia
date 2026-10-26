@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """Genera las páginas públicas de Fiestalia (eventos, profesionales, sobre nosotros, contacto)
 a partir de una plantilla común. Salida: site/*.html"""
-import os, html
+import os, sys, html
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from site_config import SITE_URL
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 
@@ -12,11 +14,18 @@ HEAD = """<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{desc}">
-  <link rel="canonical" href="https://fiestalia.com/{file}">
+  <link rel="canonical" href="{site}{file}">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="{site}{file}">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:image" content="{site}assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Fiestalia">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{site}assets/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -29,7 +38,7 @@ HEAD = """<!doctype html>
 <body>
 """
 
-NAV_LINKS = [("index.html#como-funciona", "Cómo funciona"), ("index.html#precios", "Precios"), ("bodas.html", "Bodas"), ("profesionales.html", "Profesionales"), ("index.html#faq", "Preguntas")]
+NAV_LINKS = [("index.html#como-funciona", "Cómo funciona"), ("precios.html", "Precios"), ("bodas.html", "Bodas"), ("profesionales.html", "Profesionales"), ("faq.html", "Preguntas")]
 
 def header(active=""):
     links = "".join(f'<a href="{h}"{" class=\"active\"" if h == active else ""}>{t}</a>' for h, t in NAV_LINKS)
@@ -60,7 +69,7 @@ FOOTER = """<footer class="footer">
           <li><a href="index.html#como-funciona">Cómo funciona</a></li>
           <li><a href="index.html#funciones">Funciones</a></li>
           <li><a href="index.html#demo">Live Wall</a></li>
-          <li><a href="index.html#precios">Precios</a></li>
+          <li><a href="precios.html">Precios</a></li>
           <li><a href="demo.html">Álbum de ejemplo</a></li>
           <li><a href="guia-invitados.html">Guía para invitados</a></li>
           <li><a href="guia-organizadores.html">Guía para organizadores</a></li>
@@ -147,7 +156,7 @@ def event_page(p):
     ideas = "".join(f'<li>{CHECK}<span>{i}</span></li>' for i in p["ideas"])
     stats = "".join(f'<div class="hero-stat"><b>{n}</b><span>{l}</span></div>' for n, l in p["stats"])
     plan = p["plan"]
-    body = HEAD.format(title=p["title"], desc=p["desc"], file=p["file"], jsonld=faq_jsonld(p["faq"])) + header(p["file"] if p["file"] == "bodas.html" else "") + f"""
+    body = HEAD.format(site=SITE_URL, title=p["title"], desc=p["desc"], file=p["file"], jsonld=faq_jsonld(p["faq"])) + header(p["file"] if p["file"] == "bodas.html" else "") + f"""
 <main id="top">
 <section class="hero hero-page">
   <div class="container hero-grid">
@@ -204,7 +213,7 @@ def event_page(p):
       <div class="plan-callout-price">{plan['price']}</div>
       <a class="btn btn-primary" href="app/crear.html?plan={plan['id']}">Elegir {plan['name']}</a>
     </div>
-    <p class="muted" style="margin-top:14px;font-size:14px">Pago único con IVA incluido. Empiezas gratis y amplías solo si lo necesitas. <a href="index.html#precios">Ver todos los planes</a>.</p>
+    <p class="muted" style="margin-top:14px;font-size:14px">Pago único con IVA incluido. Empiezas gratis y amplías solo si lo necesitas. <a href="precios.html">Ver todos los planes</a>.</p>
   </div>
 </section>
 
@@ -429,7 +438,7 @@ def profesionales_page():
             ("🏢", "Agencias de eventos", "Un álbum por evento, moderación previa para comunicación y descarga completa para el cliente. Factura única por pack."),
             ("🎪", "Organizadores de fiestas y festivales", "Para fiestas grandes, graduaciones o festivales: recoge el contenido del público y proyéctalo en directo.")]
     segs_html = "".join(f'<article class="feature"><div class="icon">{i}</div><h3>{t}</h3><p>{d}</p></article>' for i, t, d in segs)
-    body = HEAD.format(title="Fiestalia para profesionales: wedding planners, fotógrafos, salones y agencias", desc="Packs de álbumes QR con tu marca para wedding planners, fotógrafos, salones de bodas y agencias de eventos. Desde 20 € por álbum, sin caducidad, con Live Wall y soporte prioritario.", file="profesionales.html", jsonld=faq_jsonld(faq)) + header("profesionales.html") + f"""
+    body = HEAD.format(site=SITE_URL, title="Fiestalia para profesionales: wedding planners, fotógrafos, salones y agencias", desc="Packs de álbumes QR con tu marca para wedding planners, fotógrafos, salones de bodas y agencias de eventos. Desde 20 € por álbum, sin caducidad, con Live Wall y soporte prioritario.", file="profesionales.html", jsonld=faq_jsonld(faq)) + header("profesionales.html") + f"""
 <main id="top">
 <section class="hero hero-page">
   <div class="container hero-grid">
@@ -501,7 +510,7 @@ def sobre_page():
               ("💶", "Pago único, sin letra pequeña", "Un evento es un evento. Pagas una vez por el álbum y ya está: sin suscripciones, sin renovaciones automáticas, sin sorpresas."),
               ("🤝", "Cerca", "Somos una empresa pequeña de Madrid. Nos escribes y te responde una persona, en español, normalmente el mismo día.")]
     values_html = "".join(f'<article class="feature"><div class="icon">{i}</div><h3>{t}</h3><p>{d}</p></article>' for i, t, d in values)
-    body = HEAD.format(title="Sobre nosotros — Fiestalia", desc="Fiestalia es un servicio español de álbumes de fotos QR para bodas y eventos, creado por SYNTH MASHI, S.L. en Madrid. Datos en Europa, sin app, pago único.", file="sobre-nosotros.html", jsonld="") + header() + f"""
+    body = HEAD.format(site=SITE_URL, title="Sobre nosotros — Fiestalia", desc="Fiestalia es un servicio español de álbumes de fotos QR para bodas y eventos, creado por SYNTH MASHI, S.L. en Madrid. Datos en Europa, sin app, pago único.", file="sobre-nosotros.html", jsonld="") + header() + f"""
 <main id="top">
 <section class="hero hero-page hero-compact">
   <div class="container narrow-text">
@@ -561,7 +570,7 @@ def sobre_page():
 
 # ───────────────────────────── Contacto ─────────────────────────────
 def contacto_page():
-    body = HEAD.format(title="Contacto — Fiestalia", desc="Escríbenos por WhatsApp o correo. Respondemos en español, normalmente el mismo día. SYNTH MASHI, S.L., Alcobendas, Madrid.", file="contacto.html", jsonld="") + header() + f"""
+    body = HEAD.format(site=SITE_URL, title="Contacto — Fiestalia", desc="Escríbenos por WhatsApp o correo. Respondemos en español, normalmente el mismo día. SYNTH MASHI, S.L., Alcobendas, Madrid.", file="contacto.html", jsonld="") + header() + f"""
 <main id="top">
 <section class="hero hero-page hero-compact">
   <div class="container narrow-text">
